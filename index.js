@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors"
 import authRoute from "./routes/auth.route.js"
 import postsRoute from "./routes/posts.route.js"
 import { connectDB } from "./connectDB/connectDB.js"
@@ -11,6 +12,12 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(cors({
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+    origin:'http://localhost:5173',
+    credentials:true,
+}))
 
 app.use('/api/posts',postsRoute)
 app.use('/api/auth',authRoute)

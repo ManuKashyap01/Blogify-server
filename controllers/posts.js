@@ -35,7 +35,7 @@ export const getPost = async(req,res)=>{
     const postId = req.params.id
 
     try {
-        const post = await Post.findOne({ _id: postId }).populate('userId', 'name email')
+        const post = await Post.findOne({ _id: postId }).populate('userId', 'name email userImg')
     
         if(!post)
             throw new Error("Post not found")
@@ -48,7 +48,9 @@ export const getPost = async(req,res)=>{
 
 export const getPosts = async (req, res) => {
     try {
-        const posts = await Post.find().populate('userId', 'name email')
+        const {cat} = req.query
+        const query = cat ? {cat:cat} : {}
+        const posts = await Post.find(query).populate('userId', 'name email userImg')
         
         res.status(200).json({ success: true, posts: posts })
     } catch (error) {
