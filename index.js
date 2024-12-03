@@ -15,7 +15,7 @@ app.use(cookieParser())
 
 app.use(cors({
     methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-    origin:'https://blogifyd.netlify.app/',
+    origin:'https://blogifyd.netlify.app',
     credentials:true,
 }))
 
