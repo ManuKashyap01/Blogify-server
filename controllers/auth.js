@@ -40,14 +40,12 @@ export const register = async (req,res)=>{
 
 export const login = async (req,res)=>{
     const {name,password} = req.body
-    console.log(req.body)
     try {
         const user = await User.findOne({name})
         if(!user)
             throw new Error("Username does not exist!")
 
         const matchPassword = await bcrypt.compare(password,user.password)
-        console.log(matchPassword)
         if(!matchPassword)
             throw new Error("Wrong password!")
 
